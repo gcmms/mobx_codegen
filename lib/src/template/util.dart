@@ -22,15 +22,13 @@ class AsyncMethodChecker {
       method.returnType.isDartAsyncFuture ||
       (method.isAsynchronous &&
           !method.isGenerator &&
-          // ignore: deprecated_member_use
-          method.returnType.isDartCoreDynamic);
+          method.returnType is DynamicType);
 
   bool returnsStream(MethodElement method) =>
       _checkStream.isAssignableFromType(method.returnType) ||
       (method.isAsynchronous &&
           method.isGenerator &&
-          // ignore: deprecated_member_use
-          method.returnType.isDartCoreDynamic);
+          method.returnType is DynamicType);
 }
 
 TypeParamTemplate typeParamTemplate(
