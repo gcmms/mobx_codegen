@@ -18,18 +18,17 @@ class AsyncMethodChecker {
 
   late TypeChecker _checkStream;
 
-  bool returnsFuture(MethodElement method) =>
-      method.returnType.isDartAsyncFuture ||
-      (method.isAsynchronous &&
-          !method.isGenerator &&
-          method.returnType is DynamicType);
+bool returnsFuture(MethodElement method) =>
+    method.returnType.isDartAsyncFuture ||
+    (method.isAsynchronous &&
+        !method.isGenerator &&
+        method.returnType == DynamicTypeImpl.instance);
 
-  bool returnsStream(MethodElement method) =>
-      _checkStream.isAssignableFromType(method.returnType) ||
-      (method.isAsynchronous &&
-          method.isGenerator &&
-          method.returnType is DynamicType);
-}
+bool returnsStream(MethodElement method) =>
+    _checkStream.isAssignableFromType(method.returnType) ||
+    (method.isAsynchronous &&
+        method.isGenerator &&
+        method.returnType == DynamicTypeImpl.instance);
 
 TypeParamTemplate typeParamTemplate(
   TypeParameterElement param,
